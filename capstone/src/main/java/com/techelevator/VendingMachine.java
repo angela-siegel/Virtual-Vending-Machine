@@ -19,15 +19,15 @@ public class VendingMachine {
 				String line = inputFile.nextLine();
 				String[] items = line.split("\\|");
 
-				if (items[0].contains("A")) {
+				if (items[0].startsWith("A")) {
 					inventory.put(items[0], new Chip(items[1], new BigDecimal(items[2])));
-				} else if (items[0].contains("B")) {
+				} else if (items[0].startsWith("B")) {
 
 					inventory.put(items[0], new Candies(items[1], new BigDecimal(items[2])));
-				} else if (items[0].contains("C")) {
+				} else if (items[0].startsWith("C")) {
 
 					inventory.put(items[0], new Beverage(items[1], new BigDecimal(items[2])));
-				} else if (items[0].contains("D")) {
+				} else if (items[0].startsWith("D")) {
 
 					inventory.put(items[0], new Gum(items[1], new BigDecimal(items[2])));
 				}
