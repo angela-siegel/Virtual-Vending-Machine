@@ -7,9 +7,9 @@ public class Chip extends Product{
 	private String type;
 	private String consumeMessage;
 	
-	public Chip (String name, BigDecimal price) {
+	public Chip (String slot, String name, BigDecimal price) {
 
-		super(name, price);
+		super(slot, name, price);
 
 		type = "Chip";
 		consumeMessage = "Crunch Crunch, Yum!";

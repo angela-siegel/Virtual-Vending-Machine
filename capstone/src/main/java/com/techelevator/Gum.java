@@ -7,9 +7,9 @@ public class Gum extends Product {
 	private String type;
 	private String consumeMessage;
 	
-	public Gum (String name, BigDecimal price) {
+	public Gum (String slot, String name, BigDecimal price) {
 
-		super(name, price);
+		super(slot, name, price);
 
 		type = "Gum";
 		consumeMessage = "Chew Chew, Yum!";

@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class VendingMachine {
+	
+	BigDecimal runningBalance = new BigDecimal("0");
 
 	private Map<String, Product> inventory = new HashMap<String, Product>();
 
@@ -20,16 +22,16 @@ public class VendingMachine {
 				String[] items = line.split("\\|");
 
 				if (items[0].startsWith("A")) {
-					inventory.put(items[0], new Chip(items[1], new BigDecimal(items[2])));
+					inventory.put(items[0], new Chip(items[0], items[1], new BigDecimal(items[2])));
 				} else if (items[0].startsWith("B")) {
 
-					inventory.put(items[0], new Candies(items[1], new BigDecimal(items[2])));
+					inventory.put(items[0], new Candies(items[0], items[1], new BigDecimal(items[2])));
 				} else if (items[0].startsWith("C")) {
 
-					inventory.put(items[0], new Beverage(items[1], new BigDecimal(items[2])));
+					inventory.put(items[0], new Beverage(items[0], items[1], new BigDecimal(items[2])));
 				} else if (items[0].startsWith("D")) {
 
-					inventory.put(items[0], new Gum(items[1], new BigDecimal(items[2])));
+					inventory.put(items[0], new Gum(items[0], items[1], new BigDecimal(items[2])));
 				}
 			}
 
@@ -41,4 +43,20 @@ public class VendingMachine {
 		return inventory;
 	}
 
+	private void Purchase() {
+		
+	}
+	
+	public BigDecimal feedMoney(BigDecimal money) {
+		
+		runningBalance  = runningBalance.add(money);
+		
+		return runningBalance;
+	}
+	
+	private BigDecimal makeChange() {
+		return null;
+
+	}
+	
 }

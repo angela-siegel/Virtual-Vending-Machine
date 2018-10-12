@@ -5,13 +5,15 @@ import java.math.BigDecimal;
 public class Product {
 
 	private String name;
+	private String slot;
 	private BigDecimal price;
 	private int quantity;
 	
-	public Product(String name, BigDecimal price) {
+	public Product(String slot, String name, BigDecimal price) {
 		
 		this.name = name;
 		this.price = price;
+		this.slot = slot;
 		quantity = 5;
 	}
 	
@@ -29,6 +31,10 @@ public class Product {
 	
 	public int getQuantity() {
 		return quantity;
+	}
+	
+	public String getSlot() {
+		return slot;
 	}
 
 }

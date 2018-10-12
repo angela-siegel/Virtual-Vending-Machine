@@ -1,7 +1,6 @@
 package com.techelevator;
 
 import java.io.FileNotFoundException;
-import java.math.BigDecimal;
 import java.util.Map;
 
 import com.techelevator.view.Menu;
@@ -39,11 +38,11 @@ public class VendingMachineCLI {
 
 						Product p = (Product) entry.getValue();
 
-						System.out.println(p.getName() + ":\t\t" + p.getQuantity() + "\t\t" + p.getPrice());
+						System.out.println(p.getSlot() + ") " + p.getName() + ": " + p.getQuantity() + " " + p.getPrice());
 					}
 
 				} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
-					// do purchase - good place for a method call
+					MenuCLI.main();
 				} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
 					// do any end of program processing - good place for a method call
 					shouldLoop = false;

@@ -7,9 +7,9 @@ public class Candies extends Product {
 	private String type;
 	private String consumeMessage;
 	
-	public Candies (String name, BigDecimal price) {
+	public Candies (String slot, String name, BigDecimal price) {
 
-		super(name, price);
+		super(slot, name, price);
 
 		type = "Candy";
 		consumeMessage = "Munch Munch, Yum!";

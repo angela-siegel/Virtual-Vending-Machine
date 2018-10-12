@@ -6,9 +6,9 @@ public class Beverage extends Product {
 	private String type;
 	private String consumeMessage;
 	
-	public Beverage(String name, BigDecimal price) {
+	public Beverage(String slot, String name, BigDecimal price) {
 
-		super(name, price);
+		super(slot, name, price);
 
 		type = "Beverage";
 		consumeMessage = "Glug Glug, Yum!";
