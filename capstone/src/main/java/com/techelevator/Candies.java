@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class Candies extends Product implements Consumables{
 	
 	private String type;
-	private static String consumeMessage;
+	private String consumeMessage;
 	
 	public Candies (String slot, String name, BigDecimal price) {
 
@@ -19,7 +19,8 @@ public class Candies extends Product implements Consumables{
 		return type;
 	}
 
-	public static String getConsumeMessage() {
+	@Override
+	public String getConsumeMessage() {
 		return consumeMessage;
 	}	
 }

@@ -2,7 +2,7 @@ package com.techelevator;
 
 import java.math.BigDecimal;
 
-public class Product {
+public class Product implements Consumables{
 
 	private String name;
 	private String slot;
@@ -35,6 +35,11 @@ public class Product {
 	
 	public String getSlot() {
 		return slot;
+	}
+
+	public String getConsumeMessage() {
+
+		return "SOLD OUT";
 	}
 
 }

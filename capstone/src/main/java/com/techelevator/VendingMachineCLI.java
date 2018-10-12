@@ -38,7 +38,8 @@ public class VendingMachineCLI {
 
 						Product p = (Product) entry.getValue();
 
-						System.out.println(p.getSlot() + ") " + p.getName() + ": " + p.getQuantity() + " " + p.getPrice());
+						System.out.println(
+								p.getSlot() + ") " + p.getName() + ": " + p.getQuantity() + " " + p.getPrice());
 					}
 
 				} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {

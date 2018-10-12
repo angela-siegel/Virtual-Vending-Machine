@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class VendingMachine implements Consumables {
+public class VendingMachine {
 
 	BigDecimal runningBalance = new BigDecimal("0");
 
@@ -44,31 +44,35 @@ public class VendingMachine implements Consumables {
 	}
 
 	public String purchase(String selection) {
-		Product s = inventory.get(selection);
-		if (s.getQuantity() > 0) {
-			s.dispense();
-			// makeChange(s.getPrice());
+		
+		String response = "";
+				
+			if (!inventory.containsKey(selection)) {
+					response = "Item does not exist. Please choose again.";
+				}
 
-			if (s.getSlot().startsWith("A")) {
-				return Chip.getConsumeMessage(); 
-			}
-			else if (s.getSlot().startsWith("B")) {
-				return Candies.getConsumeMessage(); 
-			}
-			
-			else if (s.getSlot().startsWith("C")) {
-				return Beverage.getConsumeMessage(); 
-			}
-			else if (s.getSlot().startsWith("D")) {
-				return Gum.getConsumeMessage(); 
-			}
+			/*else if (s.getQuantity() > 0) {
+				s.dispense();
+				System.out.println(s.getQuantity());
+				// makeChange(s.getPrice());
 
-		} else {
-			return "SOLD OUT!";
+				if (s.getSlot().startsWith("A")) {
+					response = ((Chip) s).getConsumeMessage();
+				} else if (s.getSlot().startsWith("B")) {
+					response = ((Candies) s).getConsumeMessage();
+				}
+				else if (s.getSlot().startsWith("C")) {
+					response = ((Beverage) s).getConsumeMessage();
+				} else if (s.getSlot().startsWith("D")) {
+					response = ((Gum) s).getConsumeMessage();
+				}
+			} */
+			else {
+				response = "???";
+			}
+			return response;
+		// }
 		}
-
-		return "";
-	}
 
 	public BigDecimal feedMoney(BigDecimal money) {
 

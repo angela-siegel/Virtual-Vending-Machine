@@ -87,9 +87,11 @@ public class MenuCLI {
 					System.out.println("Please select a product by slot: ");
 					String input = in.nextLine();
 					String selection = new String(input);
-
+					
 					System.out.println("You chose: " + selection);
-					// System.out.println(vM.purchase(selection));
+					
+					System.out.println(vM.purchase(selection));
+					
 					System.out.println("Do you want to make another selection(Y or N)?");
 					String answer = in.nextLine();
 					if (answer.toLowerCase().equals("n")) {
@@ -98,7 +100,7 @@ public class MenuCLI {
 					}
 				
 			} else if (choice.equals(MAIN_MENU_OPTION_FINISH_TRANSATION)) {
-				// process for option 3 choice - good place for a method call
+				
 				shouldLoop = false;
 			} 
 				
