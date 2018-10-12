@@ -3,13 +3,16 @@ package com.techelevator;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class VendingMachine {
 
+	Product p;
 	BigDecimal runningBalance = new BigDecimal("0");
+	ArrayList<String> purchaseList = new ArrayList<String>();
 
 	private Map<String, Product> inventory = new HashMap<String, Product>();
 
@@ -49,13 +52,15 @@ public class VendingMachine {
 		String response = "";
 		if (inventory.containsKey(selection)) {
 
-			Product p = inventory.get(selection);
+			p = inventory.get(selection);
 			if (p.getQuantity() > 0) {
 				if (p.getPrice().compareTo(runningBalance) <= 0) {// have the product, have enough money
 					p.dispense();
 					response = "Here is your " + p.getName() + ". Enjoy!";
-				}
-				else {
+					purchaseList.add(p.getName() + "|" + p.getQuantity());
+					runningBalance = runningBalance.subtract(p.getPrice());
+					// System.out.println(runningBalance.toString());
+				} else {
 					response = "Product cost more than current balance. Please feed more money";
 				}
 
@@ -77,10 +82,50 @@ public class VendingMachine {
 		return runningBalance;
 	}
 
-	public BigDecimal makeChange(BigDecimal cost) {
-		runningBalance = runningBalance.subtract(cost);
-		return runningBalance;
+	public String makeChange() {
+
+		BigDecimal totalChange = runningBalance;
+		int quarters = 0;
+		int dimes = 0;
+		int nickels = 0;
+
+		while (runningBalance.compareTo(new BigDecimal("0.25")) >= 0) {
+			runningBalance = runningBalance.subtract(new BigDecimal("0.25"));
+			quarters++;
+		}
+		while (runningBalance.compareTo(new BigDecimal("0.10")) >= 0) {
+			runningBalance = runningBalance.subtract(new BigDecimal("0.10"));
+			dimes++;
+		}
+		while (runningBalance.compareTo(new BigDecimal("0.05")) >= 0) {
+			runningBalance = runningBalance.subtract(new BigDecimal("0.05"));
+			nickels++;
+		}
+
+		return "Your total change is: $" + totalChange.toString() + ". \n" + quarters + " quarters, " + dimes
+				+ " dimes, " + nickels + " nickels.\n" + "Current Balance: $" + runningBalance;
 
 	}
 
+	public String getconsumeMessage() {
+
+		String result = "";
+		
+		for(String selection : purchaseList) {
+
+		if (selection.startsWith("A")) {
+			result = result + ((Chip) p).getConsumeMessage() + "\n";
+		}
+		if (p.getSlot().startsWith("B")) {
+			result = result + ((Candies) p).getConsumeMessage() + "\n";
+		}
+		if (p.getSlot().startsWith("C")) {
+			result = result + ((Beverage) p).getConsumeMessage() + "\n";
+		}
+		if (p.getSlot().startsWith("D")) {
+			result = result + ((Gum) p).getConsumeMessage() + "\n";
+		}
+	}
+		return result;
+	}
 }
