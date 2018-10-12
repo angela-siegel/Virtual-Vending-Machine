@@ -2,10 +2,10 @@ package com.techelevator;
 
 import java.math.BigDecimal;
 
-public class Candies extends Product {
+public class Candies extends Product implements Consumables{
 	
 	private String type;
-	private String consumeMessage;
+	private static String consumeMessage;
 	
 	public Candies (String slot, String name, BigDecimal price) {
 
@@ -19,7 +19,7 @@ public class Candies extends Product {
 		return type;
 	}
 
-	public String getConsumeMessage() {
+	public static String getConsumeMessage() {
 		return consumeMessage;
 	}	
 }

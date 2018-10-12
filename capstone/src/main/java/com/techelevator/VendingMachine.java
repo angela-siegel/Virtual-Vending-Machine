@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class VendingMachine {
-	
+public class VendingMachine implements Consumables {
+
 	BigDecimal runningBalance = new BigDecimal("0");
 
 	private Map<String, Product> inventory = new HashMap<String, Product>();
@@ -37,26 +37,50 @@ public class VendingMachine {
 
 		}
 	}
-	
-	public Map<String, Product> getInventory(){
-		
+
+	public Map<String, Product> getInventory() {
+
 		return inventory;
 	}
 
-	private void Purchase() {
-		
+	public String purchase(String selection) {
+		Product s = inventory.get(selection);
+		if (s.getQuantity() > 0) {
+			s.dispense();
+			// makeChange(s.getPrice());
+
+			if (s.getSlot().startsWith("A")) {
+				return Chip.getConsumeMessage(); 
+			}
+			else if (s.getSlot().startsWith("B")) {
+				return Candies.getConsumeMessage(); 
+			}
+			
+			else if (s.getSlot().startsWith("C")) {
+				return Beverage.getConsumeMessage(); 
+			}
+			else if (s.getSlot().startsWith("D")) {
+				return Gum.getConsumeMessage(); 
+			}
+
+		} else {
+			return "SOLD OUT!";
+		}
+
+		return "";
 	}
-	
+
 	public BigDecimal feedMoney(BigDecimal money) {
-		
-		runningBalance  = runningBalance.add(money);
-		
+
+		runningBalance = runningBalance.add(money);
+
 		return runningBalance;
 	}
-	
-	private BigDecimal makeChange() {
-		return null;
+
+	public BigDecimal makeChange(BigDecimal cost) {
+		runningBalance = runningBalance.subtract(cost);
+		return runningBalance;
 
 	}
-	
+
 }

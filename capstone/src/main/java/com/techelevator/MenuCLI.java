@@ -17,6 +17,7 @@ public class MenuCLI {
 	private static final String MAIN_MENU_OPTION_FINISH_TRANSATION = "Finish Transaction";
 
 	private VendingMachine vM = new VendingMachine();
+	Scanner in = new Scanner(System.in);
 	/**********************************************************************
 	 * Define array of String constants representing the menu option text/choices to
 	 * be displayed to the user.
@@ -69,8 +70,7 @@ public class MenuCLI {
 			if (choice.equals(MAIN_MENU_OPTION_FEED_MONEY)) {
 				
 				while (true) {
-				System.out.println("Please enter an amount to feed ($1, $2, $5, $10, $20):");
-				Scanner in = new Scanner(System.in);
+				System.out.println("Please enter an amount to feed ($1, $2, $5, $10, $20):");				
 				String input = in.nextLine();
 				BigDecimal money = new BigDecimal(input);
 				
@@ -83,6 +83,19 @@ public class MenuCLI {
 				}
 				
 			} else if (choice.equals(MAIN_MENU_OPTION_SELECT_PRODUCT)) {
+				while (true) {
+					System.out.println("Please select a product by slot: ");
+					String input = in.nextLine();
+					String selection = new String(input);
+
+					System.out.println("You chose: " + selection);
+					// System.out.println(vM.purchase(selection));
+					System.out.println("Do you want to make another selection(Y or N)?");
+					String answer = in.nextLine();
+					if (answer.toLowerCase().equals("n")) {
+						break;
+					}
+					}
 				
 			} else if (choice.equals(MAIN_MENU_OPTION_FINISH_TRANSATION)) {
 				// process for option 3 choice - good place for a method call
