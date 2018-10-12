@@ -36,6 +36,7 @@ public class VendingMachine {
 			}
 
 		}
+		return;
 	}
 
 	public Map<String, Product> getInventory() {
@@ -44,35 +45,30 @@ public class VendingMachine {
 	}
 
 	public String purchase(String selection) {
-		
+
 		String response = "";
-				
-			if (!inventory.containsKey(selection)) {
-					response = "Item does not exist. Please choose again.";
+		if (inventory.containsKey(selection)) {
+
+			Product p = inventory.get(selection);
+			if (p.getQuantity() > 0) {
+				if (p.getPrice().compareTo(runningBalance) <= 0) {// have the product, have enough money
+					p.dispense();
+					response = "Here is your " + p.getName() + ". Enjoy!";
+				}
+				else {
+					response = "Product cost more than current balance. Please feed more money";
 				}
 
-			/*else if (s.getQuantity() > 0) {
-				s.dispense();
-				System.out.println(s.getQuantity());
-				// makeChange(s.getPrice());
-
-				if (s.getSlot().startsWith("A")) {
-					response = ((Chip) s).getConsumeMessage();
-				} else if (s.getSlot().startsWith("B")) {
-					response = ((Candies) s).getConsumeMessage();
-				}
-				else if (s.getSlot().startsWith("C")) {
-					response = ((Beverage) s).getConsumeMessage();
-				} else if (s.getSlot().startsWith("D")) {
-					response = ((Gum) s).getConsumeMessage();
-				}
-			} */
-			else {
-				response = "???";
+			} else {
+				response = "SOLD OUT!";
 			}
-			return response;
-		// }
+
+		} else {
+			response = "Item does not exist. Please choose again.";
 		}
+		return response;
+
+	}
 
 	public BigDecimal feedMoney(BigDecimal money) {
 
