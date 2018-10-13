@@ -8,6 +8,7 @@ public class Product {
 	private String slot;
 	private BigDecimal price;
 	private int quantity;
+	private int numberSold;
 	
 	public Product(String slot, String name, BigDecimal price) {
 		
@@ -37,4 +38,11 @@ public class Product {
 		return slot;
 	}
 
+	public int getNumberSold() {
+		return numberSold;
+	}
+
+	public void setNumberSold(int numberSold) {
+		this.numberSold = numberSold;
+	}
 }

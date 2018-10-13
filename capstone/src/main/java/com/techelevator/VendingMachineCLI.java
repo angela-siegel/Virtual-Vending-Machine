@@ -40,10 +40,8 @@ public class VendingMachineCLI {
 				String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);
 
 				Map<String, Product> inventory = vM.getInventory();
-				
+
 				if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
-
-
 
 					for (Map.Entry<String, Product> entry : inventory.entrySet()) {
 
@@ -66,9 +64,17 @@ public class VendingMachineCLI {
 
 								System.out.println("Please enter an amount to feed ($1, $2, $5, $10, $20):");
 								String input = in.nextLine();
-								BigDecimal money = new BigDecimal(input);
+								if (input.equals("1") || input.equals("2") || input.equals("5") || input.equals("10")
+										|| input.equals("20")) {
 
-								System.out.println("Balance is: $" + vM.feedMoney(money));
+									BigDecimal money = new BigDecimal(input);
+
+									System.out.println("Balance is: $" + vM.feedMoney(money));
+								}
+								else {
+									System.out.println("Please enter a valid dollar amount.");
+								}
+								
 								System.out.println("Do you want to add more money(Y or N)?");
 								String answer = in.nextLine();
 								if (answer.toLowerCase().equals("n")) {
@@ -81,9 +87,9 @@ public class VendingMachineCLI {
 								String input = in.nextLine();
 								String selection = new String(input);
 
-								System.out.println("You chose: " + selection);
+								System.out.println("You chose: " + selection.toUpperCase());
 
-								System.out.println(vM.purchase(selection));
+								System.out.println(vM.purchase(selection.toUpperCase()));
 
 								System.out.println("Do you want to make another selection(Y or N)?");
 								String answer = in.nextLine();
@@ -100,7 +106,10 @@ public class VendingMachineCLI {
 					}
 
 				} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
-					// do any end of program processing - good place for a method call
+					
+					vM.logToFile();
+					
+					System.out.println("Thank you for using Vendo-Matic 500");
 					shouldLoop = false;
 				}
 			}
