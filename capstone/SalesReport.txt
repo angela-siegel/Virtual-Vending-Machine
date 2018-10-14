@@ -1,0 +1,6 @@
+Stackers|1
+Moonpie|2
+Heavy|3
+Chiclets|4
+
+**TOTAL SALES** $5.80

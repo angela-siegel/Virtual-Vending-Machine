@@ -108,8 +108,9 @@ public class VendingMachineCLI {
 				} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
 					
 					vM.logToFile();
+					vM.getSalesReport();
 					
-					System.out.println("Thank you for using Vendo-Matic 500");
+					System.out.println("Thank you for using Mendo-Vatic 500");
 					shouldLoop = false;
 				}
 			}

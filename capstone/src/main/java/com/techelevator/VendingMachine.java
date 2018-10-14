@@ -20,7 +20,7 @@ public class VendingMachine {
 	List<String> purchaseList = new ArrayList<String>();
 	String result = "";
 	int numberSold;
-	BigDecimal totalSales;
+	BigDecimal totalSales = new BigDecimal("0");
 	List<String> log = new ArrayList<String>();
 	private static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
@@ -68,6 +68,7 @@ public class VendingMachine {
 				if (p.getPrice().compareTo(runningBalance) <= 0) {// have the product, have enough money
 					p.dispense();
 					p.setNumberSold((numberSold += 1));
+					totalSales = totalSales.add(p.getPrice());
 
 					Calendar cal = Calendar.getInstance();
 					log.add(dateFormat.format(cal.getTime()) + " " + p.getName() + " " + p.getSlot() + " "
@@ -145,7 +146,7 @@ public class VendingMachine {
 
 	public void logToFile() throws FileNotFoundException {
 
-		File logFile = new File("/Users/evanbelfiore/workspace/java-module-1-capstone-team-1", "Log.txt"); // ,
+		File logFile = new File("Log.txt"); 
 		try (PrintWriter writer = new PrintWriter(logFile)) {
 
 				for (int i = 0; i < log.size(); i++) {
@@ -157,4 +158,21 @@ public class VendingMachine {
 			System.out.println("Error 404: File Not Found");
 		}
 	}
+	
+	public void getSalesReport() throws FileNotFoundException{
+		File salesReport = new File ("SalesReport.txt");
+		try (PrintWriter writer = new PrintWriter(salesReport)) {
+			
+			for (int i = 0; i < purchaseList.size(); i++) {
+
+				String str = purchaseList.get(i);
+				writer.println(str);
+			}
+			
+			writer.println("\n" + "**TOTAL SALES** $" + totalSales.toString());
+			
+		} catch (Exception ex) {
+		System.out.println("Error 404: File Not Found");
+		}		
+		}
 }
